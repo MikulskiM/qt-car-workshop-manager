@@ -51,3 +51,10 @@ The initial UI mockup for the workshop view:
 git clone https://github.com/yourusername/WorkshopManagerQt.git
 cd WorkshopManagerQt
 open with Qt Creator or build with CMake
+```
+
+---
+
+## Screenshots of the app
+
+![image](https://github.com/user-attachments/assets/7947d2d5-7e8e-41cc-830e-5c0ef9ae7755)
