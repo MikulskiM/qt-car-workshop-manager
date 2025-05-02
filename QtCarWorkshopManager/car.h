@@ -6,6 +6,7 @@
 #include <random>
 #include <vector>
 #include <QDebug>
+#include <sstream>
 
 using namespace std;
 
@@ -21,7 +22,8 @@ class Car
 public:
     Car();
 
-    void printInfo();
+    void printDebugInfo();
+    string getCarInfo();
 };
 
 #endif // CAR_H

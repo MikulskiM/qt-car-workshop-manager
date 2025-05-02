@@ -1,6 +1,7 @@
 #include "car.h"
 
-Car::Car() {
+Car::Car()
+{
     vector<string> brands = {"Skoda", "Toyota", "Ford", "Volkswagen", "Opel"};
     map<string, vector<string>> models = {
         { "Skoda",      {"Octavia", "Fabia",    "Superb"} },
@@ -32,12 +33,18 @@ Car::Car() {
     registrationNumber = cities[cityDist(gen)] + " " + std::to_string(numDist(gen));
 
     issues = {};
-
-    printInfo();
 }
 
-void Car::printInfo()
+void Car::printDebugInfo()
 {
     qDebug() << brand << "\t" << model << "\t" << year << "\t"
          << color << "\t" << registrationNumber << "\n";
+}
+
+string Car::getCarInfo()
+{
+    ostringstream oss;
+    oss << brand << " " << model << " " << year << "\n"
+        << color << " " << registrationNumber;
+    return oss.str();
 }
