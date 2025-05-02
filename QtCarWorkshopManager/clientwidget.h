@@ -1,12 +1,12 @@
 #ifndef CLIENTWIDGET_H
 #define CLIENTWIDGET_H
 
-#include <QWidget>
+#include <QFrame>
 #include <QLabel>
 #include <QPushButton>
 #include "car.h"
 
-class ClientWidget : public QWidget
+class ClientWidget : public QFrame
 {
     Q_OBJECT
 public:

@@ -8,7 +8,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     QWidget* scrollContent = new QWidget();
+
     clientLayout = new QVBoxLayout(scrollContent);
+
     scrollContent->setLayout(clientLayout);
 
     ui->scrollArea->setWidget(scrollContent);
