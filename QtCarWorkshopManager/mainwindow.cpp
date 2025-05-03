@@ -46,7 +46,7 @@ void MainWindow::on_buttonGenerateClient_clicked()
 
         QString text;
         for (auto& issue : car->getIssues()) {
-            text += QString::fromStdString(issue.first) + " - " + QString::number(issue.second) + " $";
+            text += QString::fromStdString(issue.first) + " - " + QString::number(issue.second) + " $\n";
         }
 
         QMessageBox::information(this, "Car Issues", text);

@@ -48,13 +48,29 @@ void Car::generateCarIssues()
     random_device randDev;
     mt19937 gen(randDev());
 
-    uniform_int_distribution<> carPartDist(0, carParts.size() - 1);
-    string carPart = carParts[carPartDist(gen)];
+    uniform_int_distribution<> issueCountDist(1, MAX_CAR_ISSUES);
+    int issueCount = issueCountDist(gen);
 
-    uniform_int_distribution<> carIssueDist(0, partsIssues.at(carPart).size() - 1);
-    pair<string, int> carIssue = partsIssues.at(carPart)[carIssueDist(gen)];
+    set<string> alreadyUsedIssues;
 
-    issues[carIssue.first] = carIssue.second;
+    while ((int)issues.size() < issueCount)
+    {
+        uniform_int_distribution<> carPartDist(0, carParts.size() - 1);
+        string carPart = carParts[carPartDist(gen)];
+
+        vector<pair<string, int>> issueList = partsIssues[carPart];
+
+        uniform_int_distribution<> carIssueDist(0, issueList.size() - 1);
+        pair<string, int> carIssue = issueList[carIssueDist(gen)];
+
+        string issueKey = carPart + ":" + carIssue.first;
+
+        if (alreadyUsedIssues.find(issueKey) == alreadyUsedIssues.end())
+        {
+            alreadyUsedIssues.insert(issueKey);
+            issues[carIssue.first] = carIssue.second;
+        }
+    }
 }
 
 Car::Car()

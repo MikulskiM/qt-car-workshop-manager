@@ -8,6 +8,8 @@
 #include <QDebug>
 #include <sstream>
 
+#define MAX_CAR_ISSUES 5
+
 using namespace std;
 
 class Car
