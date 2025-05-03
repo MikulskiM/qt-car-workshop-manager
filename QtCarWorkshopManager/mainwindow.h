@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QVBoxLayout>
+#include <QMessageBox>
 #include <vector>
 
 #include "Car.h"
@@ -27,7 +28,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    vector<Car> clients;
+    vector<Car*> clients;
     QVBoxLayout* clientLayout;
 };
 #endif // MAINWINDOW_H

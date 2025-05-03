@@ -10,7 +10,7 @@ class ClientWidget : public QFrame
 {
     Q_OBJECT
 public:
-    explicit ClientWidget(Car& car, QWidget *parent = nullptr);
+    explicit ClientWidget(Car& car, QWidget* parent = nullptr);
 
 signals:
     void showIssues();

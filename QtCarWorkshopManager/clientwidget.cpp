@@ -1,5 +1,4 @@
 #include "clientwidget.h"
-
 #include <QHBoxLayout>
 
 ClientWidget::ClientWidget(Car& car, QWidget *parent)
@@ -12,11 +11,10 @@ ClientWidget::ClientWidget(Car& car, QWidget *parent)
     );
 
     this->setFixedHeight(80);
-
     displayClientInfo(car);
 }
 
-void ClientWidget::displayClientInfo(Car &car)
+void ClientWidget::displayClientInfo(Car& car)
 {
     QHBoxLayout* layout = new QHBoxLayout(this);
 

@@ -19,11 +19,16 @@ class Car
     string registrationNumber;
     map<string, int> issues;
 
+    void generateCarIssues();
+
 public:
     Car();
+    ~Car();
 
     void printDebugInfo();
     string getCarInfo();
+    map<string, int> getIssues();
+    string getCarRegistrationNumber();
 };
 
 #endif // CAR_H
