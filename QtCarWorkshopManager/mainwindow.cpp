@@ -51,8 +51,33 @@ void MainWindow::on_buttonGenerateClient_clicked()
 
         QMessageBox::information(this, "Car Issues", text);
     });
-    connect(cw, &ClientWidget::fixIssues, this, []() {
-        qDebug().noquote() << "Fixing car issues!";
+
+    connect(cw, &ClientWidget::fixIssues, this, [this, car]() {
+        qDebug().noquote() << "Fixing car issues - " << car->getCarRegistrationNumber() << ":";
+        if (car->getIssues().empty()) {
+            qDebug().noquote() << "ERROR: Car issues empty!";
+        }
+
+        int totalCost = 0;
+        for (auto& issue : car->getIssues()) {
+            totalCost += issue.second;
+        }
+
+        QMessageBox fixBox;
+        fixBox.setWindowTitle("Fix Car Issues");
+        fixBox.setText(QString("Total cost to fix car issues = %1 $").arg(totalCost));
+
+        QPushButton* paidButton = fixBox.addButton(QString("Paid %1 $").arg(totalCost), QMessageBox::AcceptRole);
+        QPushButton* exitButton = fixBox.addButton(QString("Exit"), QMessageBox::RejectRole);
+
+        fixBox.exec();
+
+        if (fixBox.clickedButton() == paidButton) {
+            qDebug() << "User paid $" << totalCost;
+        }
+        else {
+            qDebug() << "User canceled payment";
+        }
     });
 
     clientLayout->addWidget(cw);
