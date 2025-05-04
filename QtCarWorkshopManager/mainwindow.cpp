@@ -105,3 +105,79 @@ void MainWindow::on_buttonGenerateClient_clicked()
 
     clientLayout->addWidget(cw);
 }
+
+void MainWindow::on_buttonGeneratePdfReport_clicked()
+{
+    QFile file("repair_log.txt");
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QMessageBox::warning(this, "File Error", "Could not open repair_log.txt");
+        return;
+    }
+
+    QTextStream in(&file);
+    QMap<QString, QPair<int, int>> repairs;
+    int total = 0;
+
+    while (!in.atEnd()) {
+        QString line = in.readLine().trimmed();
+        if (line.startsWith("- ")) {
+            int sep = line.indexOf(":");
+            if (sep == -1) continue;
+
+            QString issue = line.mid(2, sep - 2);
+            QString priceStr = line.mid(sep + 1).trimmed();
+            priceStr.chop(2);   // delete " $"
+            int price = priceStr.toInt();
+
+            auto& entry = repairs[issue];
+            entry.first += 1;
+            entry.second += price;
+
+            total += price;
+        }
+    }
+    file.close();
+
+    QPdfWriter pdf("report.pdf");
+    pdf.setPageSize(QPageSize(QPageSize::A4));
+    pdf.setResolution(300);
+
+    QPainter p(&pdf);
+    if (!p.isActive()) {
+        QMessageBox::warning(this, "Painter Error", "Could not start painter");
+        return;
+    }
+
+    p.setWindow(0, 0, 595, 842);    // A4
+    QFont font("Courier");
+    font.setPointSize(2);
+    p.setFont(font);
+
+    int y = 50;
+    int dy = 10;
+    int x = 50;
+
+    p.drawText(x, y, "------------------------------------------------------------");
+    y += dy;
+
+    for (auto it = repairs.begin(); it != repairs.end(); ++it) {
+        QString line = QString("%1 $ | %2x | %3")
+        .arg(it.value().second, 6, 10, QChar(' '))
+            .arg(it.value().first, 2)
+            .arg(it.key());
+        p.drawText(x, y, line);
+        y += dy;
+    }
+
+    p.drawText(x, y, "------------------------------------------------------------");
+    y += dy;
+
+    QString totalLine = QString("| TOTAL | %1 $").arg(total);
+    p.drawText(x, y, totalLine);
+    y += dy;
+
+    p.drawText(x, y, "------------------------------------------------------------");
+    p.end();
+
+    QMessageBox::information(this, "Report", "PDF report generated as 'report.pdf'");
+}

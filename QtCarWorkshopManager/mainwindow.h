@@ -6,6 +6,9 @@
 #include <QMessageBox>
 #include <vector>
 #include <fstream>
+#include <QFile>
+#include <QPdfWriter>
+#include <QPainter>
 
 #include "Car.h"
 #include "clientwidget.h"
@@ -26,6 +29,7 @@ public:
 
 private slots:
     void on_buttonGenerateClient_clicked();
+    void on_buttonGeneratePdfReport_clicked();
 
 private:
     Ui::MainWindow *ui;
