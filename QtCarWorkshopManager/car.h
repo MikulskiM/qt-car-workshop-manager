@@ -30,6 +30,7 @@ public:
     void printDebugInfo();
     string getCarInfo();
     map<string, int> getIssues();
+    void clearIssues();
     string getCarRegistrationNumber();
 };
 

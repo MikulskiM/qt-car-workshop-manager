@@ -131,6 +131,10 @@ map<string, int> Car::getIssues()
     return issues;
 }
 
+void Car::clearIssues()
+{
+    issues.clear();
+}
 
 string Car::getCarRegistrationNumber()
 {

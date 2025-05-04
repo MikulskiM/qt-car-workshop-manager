@@ -52,7 +52,7 @@ void MainWindow::on_buttonGenerateClient_clicked()
         QMessageBox::information(this, "Car Issues", text);
     });
 
-    connect(cw, &ClientWidget::fixIssues, this, [this, car]() {
+    connect(cw, &ClientWidget::fixIssues, this, [this, car, cw]() {
         qDebug().noquote() << "Fixing car issues - " << car->getCarRegistrationNumber() << ":";
         if (car->getIssues().empty()) {
             qDebug().noquote() << "ERROR: Car issues empty!";
@@ -73,7 +73,17 @@ void MainWindow::on_buttonGenerateClient_clicked()
         fixBox.exec();
 
         if (fixBox.clickedButton() == paidButton) {
-            qDebug() << "User paid $" << totalCost;
+            qDebug() << "Client paid $" << totalCost;
+            car->clearIssues();
+
+            auto fixedCar = std::find(clients.begin(), clients.end(), car);
+            if (fixedCar != clients.end()) {
+                delete *fixedCar;
+                clients.erase(fixedCar);
+            }
+
+            clientLayout->removeWidget(cw);
+            cw->deleteLater();
         }
         else {
             qDebug() << "User canceled payment";
