@@ -5,6 +5,7 @@
 #include <QVBoxLayout>
 #include <QMessageBox>
 #include <vector>
+#include <fstream>
 
 #include "Car.h"
 #include "clientwidget.h"

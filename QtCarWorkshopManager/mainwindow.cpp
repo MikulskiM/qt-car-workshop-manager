@@ -74,6 +74,19 @@ void MainWindow::on_buttonGenerateClient_clicked()
 
         if (fixBox.clickedButton() == paidButton) {
             qDebug() << "Client paid $" << totalCost;
+
+            std::ofstream file("repair_log.txt", std::ios::app);
+            if (file.is_open()) {
+                file << "Client: " << car->getCarInfo() << "\n";
+                file << "Fixed issues:\n";
+                for (const auto& issue : car->getIssues()) {
+                    file << "- " << issue.first << ": " << issue.second << " $\n";
+                }
+                file << "Total paid: " << totalCost << " $\n";
+                file << "-------------------------\n";
+                file.close();
+            }
+
             car->clearIssues();
 
             auto fixedCar = std::find(clients.begin(), clients.end(), car);

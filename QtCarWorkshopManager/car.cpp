@@ -121,8 +121,7 @@ void Car::printDebugInfo()
 string Car::getCarInfo()
 {
     ostringstream oss;
-    oss << brand << " " << model << " " << year << "\n"
-        << color << " " << registrationNumber;
+    oss << registrationNumber << "\n" << color << " " << brand << " " << model << " " << year;
     return oss.str();
 }
 
