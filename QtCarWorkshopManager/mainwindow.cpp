@@ -36,7 +36,7 @@ void MainWindow::on_buttonGenerateClient_clicked()
     ClientWidget* cw = new ClientWidget(*car, this);
 
     connect(cw, &ClientWidget::showIssues, this, [this, car]() {
-        qDebug().noquote() << "Showing car issues - " << car->getCarRegistrationNumber() << ":";
+        qDebug().noquote() << "\nShowing car issues - " << car->getCarRegistrationNumber() << ":";
         if (car->getIssues().empty()) {
             qDebug().noquote() << "ERROR: Car issues empty!";
         }
@@ -90,6 +90,7 @@ void MainWindow::on_buttonGenerateClient_clicked()
             }
 
             workshop.addTakings(totalCost);
+            workshop.sendData();
 
             car->clearIssues();
 

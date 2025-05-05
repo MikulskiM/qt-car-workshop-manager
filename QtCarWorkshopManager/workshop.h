@@ -5,6 +5,7 @@
 #include <random>
 #include <vector>
 #include <QDebug>
+#include <QTcpSocket>
 
 using namespace std;
 
@@ -20,6 +21,9 @@ public:
 
     void addTakings(int amount);
     void addIssue(string issue, int cost);
+
+    string serializeData();
+    void sendData(string host = "127.0.0.1", int port = 12345);
 };
 
 #endif // WORKSHOP_H
