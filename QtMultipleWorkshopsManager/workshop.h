@@ -5,6 +5,7 @@
 #include <random>
 #include <vector>
 #include <QDebug>
+#include <map>
 
 using namespace std;
 
@@ -20,6 +21,10 @@ public:
     ~Workshop();
 
     void generateWorkshopAddress();
+    int getTakings();
+    void addTakings(int newTakings);
+    map<string, int> getIssues();
+    void addIssue(string name, int cost);
 };
 
 #endif // WORKSHOP_H

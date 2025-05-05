@@ -7,22 +7,23 @@
 
 using namespace std;
 
+class MainWindow; // forward declaration so readData() can use mainwindow->handleNewWorkshop(takings, issues)
+
 class TcpServer : public QObject
 {
     Q_OBJECT
 
 public:
-    TcpServer();
+    TcpServer(MainWindow* mw);
     void start();
 
 private:
     QTcpServer* server;
     QTcpSocket* socket;
+    MainWindow* mainWindow;
 
-private slots:
-    void newConnection();
+    void handleNewConnection();
     void readData();
-
 };
 
 #endif // TCPSERVER_H

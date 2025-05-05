@@ -2,7 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QVBoxLayout>
 
+#include "workshop.h"
+#include "workshopwidget.h"
 #include "tcpserver.h"
 
 QT_BEGIN_NAMESPACE
@@ -19,8 +22,13 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void handleNewWorkshop(int takings, QMap<QString, int> issues);
+
 private:
     Ui::MainWindow *ui;
+
     TcpServer* tcpServer;
+    QVBoxLayout* layout;
+    vector<Workshop*> workshops;
 };
 #endif // MAINWINDOW_H

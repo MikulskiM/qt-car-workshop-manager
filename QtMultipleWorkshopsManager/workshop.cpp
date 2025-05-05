@@ -31,3 +31,23 @@ void Workshop::generateWorkshopAddress()
 
     qDebug().noquote() << "Workshop created - " << city << " " << address;
 }
+
+int Workshop::getTakings()
+{
+    return takings;
+}
+
+void Workshop::addTakings(int newTakings)
+{
+    takings = newTakings;
+}
+
+map<string, int> Workshop::getIssues()
+{
+    return issues;
+}
+
+void Workshop::addIssue(string name, int cost)
+{
+    issues[name] += cost;
+}
