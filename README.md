@@ -55,6 +55,11 @@ open with Qt Creator or build with CMake
 
 ---
 
-## Screenshots of the app
+## Screenshots of the app:
 
 ![image](https://github.com/user-attachments/assets/7947d2d5-7e8e-41cc-830e-5c0ef9ae7755)
+
+generated report:
+
+![image](https://github.com/user-attachments/assets/46a4673b-290e-48aa-92c3-487201718372)
+
