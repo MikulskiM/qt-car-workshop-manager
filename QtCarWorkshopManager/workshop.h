@@ -18,6 +18,7 @@ class Workshop
 
 public:
     Workshop();
+    void generateWorkshopAddress();
 
     void addTakings(int amount);
     void addIssue(string issue, int cost);

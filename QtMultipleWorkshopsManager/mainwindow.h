@@ -22,7 +22,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    void handleNewWorkshop(int takings, QMap<QString, int> issues);
+    void handleNewWorkshop(QString city, QString address, int takings, QMap<QString, int> issues);
 
 private:
     Ui::MainWindow *ui;
@@ -30,5 +30,6 @@ private:
     TcpServer* tcpServer;
     QVBoxLayout* layout;
     vector<Workshop*> workshops;
+    vector<WorkshopWidget*> workshopWidgets;
 };
 #endif // MAINWINDOW_H

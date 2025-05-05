@@ -33,19 +33,27 @@ void TcpServer::readData()
 {
     QByteArray raw = socket->readAll();
     QList<QByteArray> lines = raw.split('\n');
+
+    QString city;
+    QString address;
     int takings = 0;
     QMap<QString, int> issues;
 
     for (QByteArray line : lines) {
-        if (line.startsWith("takings=")) {
+        if (line.startsWith("city=")) {
+            city = line.mid(5).trimmed();
+        } else if (line.startsWith("address=")) {
+            address = line.mid(8).trimmed();
+        } else if (line.startsWith("takings=")) {
             takings = line.mid(8).toInt();
         } else if (line.startsWith("issue=")) {
             QList<QByteArray> parts = line.mid(6).split(':');
             if (parts.size() == 2) {
-                issues[QString(parts[0])] = parts[1].toInt();
+                issues[QString(parts[0])] += parts[1].toInt();
             }
         }
     }
 
-    mainWindow->handleNewWorkshop(takings, issues);
+    mainWindow->handleNewWorkshop(city, address, takings, issues);
 }
+

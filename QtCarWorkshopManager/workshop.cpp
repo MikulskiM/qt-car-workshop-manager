@@ -1,6 +1,27 @@
 #include "workshop.h"
 
-Workshop::Workshop() : city("undefined"), address("undefined"), takings(0) {}
+Workshop::Workshop() : takings(0)
+{
+    generateWorkshopAddress();
+}
+
+void Workshop::generateWorkshopAddress()
+{
+    vector<string> cities = {"Gdansk", "Warsaw", "Krakow", "Katowice", "Wroclaw"};
+    vector<string> roads = {"Ogrodowa", "Szeroka", "Kolorowa", "Mechaniczna", "Dziurawa"};
+
+    random_device rd;
+    mt19937 gen(rd());
+
+    city = cities[uniform_int_distribution<>(0, cities.size() - 1)(gen)];
+    string road = roads[uniform_int_distribution<>(0, roads.size() - 1)(gen)];
+    int number = uniform_int_distribution<>(1, 299)(gen);
+
+    address = road + " " + to_string(number);
+
+    qDebug().noquote() << "Workshop created - " << city << " " << address;
+}
+
 
 void Workshop::addTakings(int amount)
 {
@@ -14,12 +35,17 @@ void Workshop::addIssue(string issue, int cost)
 
 string Workshop::serializeData()
 {
-    string data = "takings=" + to_string(takings) + "\n";
+    string data = "city=" + city + "\n";
+    data += "address=" + address + "\n";
+    data += "takings=" + to_string(takings) + "\n";
+
     for (auto& issue : issues) {
         data += "issue=" + issue.first + ":" + to_string(issue.second) + "\n";
     }
+
     return data;
 }
+
 
 void Workshop::sendData(string host, int port)
 {

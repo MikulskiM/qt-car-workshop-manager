@@ -51,3 +51,28 @@ void Workshop::addIssue(string name, int cost)
 {
     issues[name] += cost;
 }
+
+string Workshop::getCity() {
+    return city;
+}
+
+string Workshop::getAddress() {
+    return address;
+}
+
+void Workshop::mergeIssues(QMap<QString, int> newIssues)
+{
+    for (auto issue = newIssues.begin(); issue != newIssues.end(); issue++) {
+        issues[issue.key().toStdString()] += issue.value();
+        takings += issue.value();
+    }
+}
+
+void Workshop::setCity(string c)
+{
+    city = c;
+}
+void Workshop::setAddress(string a)
+{
+    address = a;
+}
