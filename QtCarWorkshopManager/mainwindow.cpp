@@ -79,7 +79,7 @@ void MainWindow::on_buttonGenerateClient_clicked()
             if (file.is_open()) {
                 file << "Client: " << car->getCarInfo() << "\n";
                 file << "Fixed issues:\n";
-                for (const auto& issue : car->getIssues()) {
+                for (auto& issue : car->getIssues()) {
                     file << "- " << issue.first << ": " << issue.second << " $\n";
                 }
                 file << "Total paid: " << totalCost << " $\n";
