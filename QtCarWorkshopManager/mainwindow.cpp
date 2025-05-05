@@ -81,11 +81,15 @@ void MainWindow::on_buttonGenerateClient_clicked()
                 file << "Fixed issues:\n";
                 for (auto& issue : car->getIssues()) {
                     file << "- " << issue.first << ": " << issue.second << " $\n";
+
+                    workshop.addIssue(issue.first, issue.second);
                 }
                 file << "Total paid: " << totalCost << " $\n";
                 file << "-------------------------\n";
                 file.close();
             }
+
+            workshop.addTakings(totalCost);
 
             car->clearIssues();
 

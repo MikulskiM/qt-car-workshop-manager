@@ -12,6 +12,7 @@
 
 #include "Car.h"
 #include "clientwidget.h"
+#include "workshop.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -35,5 +36,6 @@ private:
     Ui::MainWindow *ui;
     vector<Car*> clients;
     QVBoxLayout* clientLayout;
+    Workshop workshop;
 };
 #endif // MAINWINDOW_H
