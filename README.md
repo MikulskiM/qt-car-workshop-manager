@@ -1,23 +1,34 @@
 # Qt Car Workshop Manager
 
-A Qt-based C++ application to simulate and manage the daily operations of a car repair workshop.
-
 ## 🚗 Overview
 
-This app is designed for two roles:
+This repository contains two Qt-based applications that work together:
 
-- **Workshop View**: Create and manage clients, display vehicle issues, fix them with service summaries, and generate reports for a single workshop.
-- **Manager View** (planned): Analyze data from multiple workshops and generate collective reports.
-
----
-
-## 🧰 Features
-
+### 🛠 QtCarWorkshopManager
+An application that simulates a **single automotive workshop**:
+- Generates a random workshop location (city + address) on startup.
 - Dynamically generate clients' cars and repair issues
+- Dynamically adds and updates cars in a scrollable UI.
 - View and fix car issues
-- Generate repair receipts in PDF
-- Generate a monthly report PDF with repair statistics and earnings
 - Scrollable client list with real-time interaction
+- Tracks total revenue (`takings`) and types of issues fixed.
+- Sends current workshop state over TCP after each repair.
+- Creates simple reports in PDF about all repairs
+
+### 📊 QtMultipleWorkshopsManager
+A second application that acts as a **central monitor** for multiple workshops:
+- Runs a TCP server and listens for incoming workshop data.
+- Parses received messages with `city`, `address`, `takings`, and issues.
+- Dynamically adds or updates workshop widgets in a scrollable UI.
+- Visually displays each workshop's location, income, and repair history (e.g. `3x Dead Battery – 1200 $`).
+
+### 🔌 Communication
+Data is exchanged in a simple TCP format:
+city=Krakow
+address=Szeroka 184
+takings=3160
+issue=Loose tie rod:1400
+issue=Dead battery:400
 
 ---
 
