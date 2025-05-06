@@ -22,8 +22,8 @@ WorkshopWidget::WorkshopWidget(Workshop& workshop, QWidget* parent)
 
     for (auto& issue : workshop.getIssues()) {
         QString name = QString::fromStdString(issue.first);
-        counted[name] += 1;
-        totalCost[name] += issue.second;
+        counted[name] = issue.second.first;
+        totalCost[name] = issue.second.second;
     }
 
     for (auto it = counted.begin(); it != counted.end(); ++it) {
@@ -42,16 +42,12 @@ void WorkshopWidget::updateInfo()
     text += "Workshop: " + QString::fromStdString(workshop.getCity()) + " " + QString::fromStdString(workshop.getAddress()) + "\n";
     text += "Takings: " + QString::number(workshop.getTakings()) + " $\n";
 
-    QMap<QString, int> counted;
-    QMap<QString, int> totalCost;
-
     for (auto& issue : workshop.getIssues()) {
-        counted[QString::fromStdString(issue.first)] += 1;
-        totalCost[QString::fromStdString(issue.first)] += issue.second;
-    }
+        QString name = QString::fromStdString(issue.first);
+        int count = issue.second.first;
+        int cost = issue.second.second;
 
-    for (auto issue = counted.begin(); issue != counted.end(); issue++) {
-        text += QString::number(issue.value()) + "x " + issue.key() + " - " + QString::number(totalCost[issue.key()]) + " $\n";
+        text += QString::number(count) + "x " + name + " - " + QString::number(cost) + " $\n";
     }
 
     label->setText(text);

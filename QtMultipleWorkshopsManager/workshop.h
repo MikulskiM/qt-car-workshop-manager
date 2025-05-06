@@ -14,7 +14,7 @@ class Workshop
     string city;
     string address;
     int takings;
-    map<string, int> issues;
+    map<string, pair<int, int>> issues; // issue_name, <counter, total_money>
 
 public:
     Workshop();
@@ -25,7 +25,7 @@ public:
     int getTakings();
     void addTakings(int newTakings);
 
-    map<string, int> getIssues();
+    map<string, pair<int, int>> getIssues();
     void addIssue(string name, int cost);
 
     void mergeIssues(QMap<QString, int> newIssues);

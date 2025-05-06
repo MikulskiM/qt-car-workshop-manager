@@ -42,14 +42,15 @@ void Workshop::addTakings(int newTakings)
     takings = newTakings;
 }
 
-map<string, int> Workshop::getIssues()
+map<string, pair<int, int>> Workshop::getIssues()
 {
     return issues;
 }
 
 void Workshop::addIssue(string name, int cost)
 {
-    issues[name] += cost;
+    issues[name].first += 1;
+    issues[name].second += cost;
 }
 
 string Workshop::getCity() {
@@ -63,7 +64,8 @@ string Workshop::getAddress() {
 void Workshop::mergeIssues(QMap<QString, int> newIssues)
 {
     for (auto issue = newIssues.begin(); issue != newIssues.end(); issue++) {
-        issues[issue.key().toStdString()] += issue.value();
+        issues[issue.key().toStdString()].first += 1;
+        issues[issue.key().toStdString()].second += issue.value();
         takings += issue.value();
     }
 }
