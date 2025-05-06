@@ -63,3 +63,6 @@ generated report:
 
 ![image](https://github.com/user-attachments/assets/46a4673b-290e-48aa-92c3-487201718372)
 
+apps working together, sharing information with TCP:
+
+![image](https://github.com/user-attachments/assets/a60bfc77-d0a5-4f94-b388-cc54ee857b1f)
